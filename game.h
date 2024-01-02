@@ -9,6 +9,8 @@ public:
 	void SetTarget( Surface* surface ) { screen = surface; }
 	void Init();
 	void Shutdown();
+	void DrawI(int x, int y);
+	void DrawFatI(int x, int y, int thickness = 1);
 	void Tick( float deltaTime );
 	void MouseUp( int button ) { /* implement if you want to detect mouse button presses */ }
 	void MouseDown( int button ) { /* implement if you want to detect mouse button presses */ }
@@ -16,7 +18,10 @@ public:
 	void KeyUp( int key ) { /* implement if you want to handle keys */ }
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 private:
-	Surface* screen;
+	Surface* screen = nullptr;
+
+	float x = 100.0f;
+	float y = 100.0f;
 };
 
 }; // namespace Tmpl8
