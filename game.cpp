@@ -1,6 +1,7 @@
 #include "game.h"
+
+#include "SpriteAnim.h"
 #include "surface.h"
-#include <cstdio> //printf
 
 namespace Tmpl8
 {
@@ -19,22 +20,25 @@ namespace Tmpl8
 	}
 
 	static Sprite rotatingGun(new Surface("assets/aagun.tga"), 36);
-	static int frame = 0;
+	SpriteAnim rotatingGunAnim(&rotatingGun, 50.f);
 
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
 	void Game::Tick(float deltaTime)
 	{
+		//convert dT to seconds
+		deltaTime /= 1000;
+
+//======Update Loop=================//
+
+		rotatingGunAnim.Update(deltaTime);
+
+//======Render Loop=================//
 		// clear the graphics window
 		screen->Clear(0);
-		// print something in the graphics window
-		screen->Print("hello world", 2, 2, 0xffffff);
-		// print something to the text window
-		printf("this goes to the console window.\n");
-		// draw a sprite
-		rotatingGun.SetFrame(frame);
-		rotatingGun.Draw(screen, 100, 100);
-		if (++frame == 36) frame = 0;
+		
+		// draw the animation
+		rotatingGunAnim.Draw(screen, 0, 0);
 	}
 };
