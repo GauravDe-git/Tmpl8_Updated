@@ -1,4 +1,6 @@
 #pragma once
+#include <SDL_keyboard.h>
+#include <SDL_scancode.h>
 
 namespace Tmpl8 {
 
@@ -13,10 +15,13 @@ public:
 	void MouseUp( int button ) { /* implement if you want to detect mouse button presses */ }
 	void MouseDown( int button ) { /* implement if you want to detect mouse button presses */ }
 	void MouseMove( int x, int y ) { /* implement if you want to detect mouse movement */ }
-	void KeyUp( int key ) { /* implement if you want to handle keys */ }
-	void KeyDown( int key ) { /* implement if you want to handle keys */ }
+	void KeyDown(SDL_Scancode scancode);
+	void KeyUp(SDL_Scancode scancode){};
 private:
 	Surface* screen;
+	int px = 150;
+	int py = 150;
+	const Uint8* state = SDL_GetKeyboardState(NULL);
 };
 
 }; // namespace Tmpl8
