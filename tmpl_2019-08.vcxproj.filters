@@ -1,26 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="surface.cpp">
       <Filter>template code</Filter>
     </ClCompile>
     <ClCompile Include="template.cpp">
       <Filter>template code</Filter>
     </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnim.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h" />
     <ClInclude Include="surface.h">
       <Filter>template code</Filter>
     </ClInclude>
     <ClInclude Include="template.h">
       <Filter>template code</Filter>
     </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnim.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Bounds.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">
       <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc">
+      <UniqueIdentifier>{cd86514c-d07d-4248-91d2-76dc193bd2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{60bb744f-382d-43ea-85e6-db8a6fcfdb90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
