@@ -13,15 +13,6 @@
     <ClCompile Include="SpriteAnim.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderComponent.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -48,10 +39,25 @@
     <ClInclude Include="Bounds.h">
       <Filter>inc</Filter>
     </ClInclude>
-    <ClInclude Include="ColliderComponent.h">
+    <ClInclude Include="Timer.h">
       <Filter>inc</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
+    <ClInclude Include="Transform2DComponent.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
       <Filter>inc</Filter>
     </ClInclude>
   </ItemGroup>

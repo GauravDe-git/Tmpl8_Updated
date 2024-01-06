@@ -230,9 +230,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ColliderComponent.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="SpriteAnim.cpp" />
     <ClCompile Include="surface.cpp" />
@@ -243,12 +240,17 @@
     <ClInclude Include="Bounds.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="SpriteAnim.h" />
+    <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Transform2DComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="_readme.txt" />

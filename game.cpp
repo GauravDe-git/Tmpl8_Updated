@@ -1,6 +1,5 @@
 #include "game.h"
 
-#include "SpriteAnim.h"
 #include "surface.h"
 
 namespace Tmpl8
@@ -10,6 +9,8 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Init()
 	{
+		player = new Player("assets/Gargoyle_Chase.png",4,100,100);
+		entities.push_back(player);
 	}
 	
 	// -----------------------------------------------------------
@@ -19,9 +20,6 @@ namespace Tmpl8
 	{
 	}
 
-	static Sprite rotatingGun(new Surface("assets/aagun.tga"), 36);
-	SpriteAnim rotatingGunAnim(&rotatingGun, 50.f);
-
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
@@ -30,13 +28,23 @@ namespace Tmpl8
 		//convert dT to seconds
 		deltaTime /= 1000;
 
-		rotatingGunAnim.Update(deltaTime);
+		
 
 		// clear the graphics window
-		screen->Clear(0);
+		screen->Clear(0xffffff);
 
-		// draw the animation
-		rotatingGunAnim.Draw(screen, 0, 0,1);
+		// Update and draw all entities
+		for (Entity* entity : entities)
+		{
+			SpriteComponent* sprite = entity->GetComponent<SpriteComponent>();
+			if (sprite)
+			{
+				sprite->Update(deltaTime);
+				sprite->Draw(screen, entity->GetComponent<Transform2DComponent>()->position.x, entity->GetComponent<Transform2DComponent>()->position.y, 1.0f);
+				renderSystem.Update(*entity, *screen);
+			}
+		}
+		player->GetComponent<Transform2DComponent>()->Translate(0.5f, 0);
 		
 	}
 };

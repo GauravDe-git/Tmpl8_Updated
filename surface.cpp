@@ -453,8 +453,9 @@ Sprite::~Sprite()
 	}
 }*/
 
-//The alpha value is between 0 and 1, with 0 being fully transparent and 1 being fully opaque
-void Sprite::Draw(Surface* a_Target, int a_X, int a_Y, float alpha)
+// The alpha value is between 0 and 1, with 0 being fully transparent and 1 being fully opaque.
+// Also implemented horizontal flipping.
+void Sprite::Draw(Surface* a_Target, int a_X, int a_Y, float alpha, bool flip = false)
 {
 	if ((a_X < -m_Width) || (a_X > (a_Target->GetWidth() + m_Width))) return;
 	if ((a_Y < -m_Height) || (a_Y > (a_Target->GetHeight() + m_Height))) return;
@@ -492,7 +493,8 @@ void Sprite::Draw(Surface* a_Target, int a_X, int a_Y, float alpha)
 				if (c1 & 0xff000000)
 				{
 					const Pixel c2 = *(dest + addr + x);
-					*(dest + addr + x) = AlphaBlend(c1, c2, alpha);
+					int flip_offset = flip ? width - 1 : 0;
+					*(dest + addr + abs(flip_offset - x)) = AlphaBlend(c1, c2, alpha);
 				}
 			}
 			addr += dpitch;
@@ -500,6 +502,7 @@ void Sprite::Draw(Surface* a_Target, int a_X, int a_Y, float alpha)
 		}
 	}
 }
+
 
 void Sprite::DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a_Target ) const
 {
