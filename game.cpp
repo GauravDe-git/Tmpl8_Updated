@@ -19,9 +19,10 @@ namespace Tmpl8
 	{
 	}
 
-	static Sprite rotatingGun(new Surface("assets/aagun.tga"), 36);
-	SpriteAnim rotatingGunAnim(&rotatingGun, 50.f);
-
+	Sprite theSprite(new Surface("assets/ball.png"), 1);
+	int spriteX = 0;
+	int spriteY = 100;
+	float speed = 1.f;
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
@@ -30,13 +31,22 @@ namespace Tmpl8
 		//convert dT to seconds
 		deltaTime /= 1000;
 
-		rotatingGunAnim.Update(deltaTime);
-
 		// clear the graphics window
 		screen->Clear(0);
 
-		// draw the animation
-		rotatingGunAnim.Draw(screen, 0, 0,1);
-		
+		theSprite.Draw(screen, spriteX, spriteY,1);
+		spriteY += speed;
+		spriteX += speed;
+		speed += 1.f;
+		if (spriteY > (512 - 50))
+		{
+			spriteY = 512 - 50;
+			speed = -speed;
+		}
+		else if(spriteX > (800 - 50))
+		{
+			spriteX = 800 - 50;
+			speed = -speed;
+		}
 	}
 };
