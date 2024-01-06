@@ -33,6 +33,25 @@ inline Pixel SubBlend( Pixel a_Color1, Pixel a_Color2 )
 	if (blue < 0) blue = 0;
 	return static_cast<Pixel>(red + green + blue);
 }
+// alpha blending	
+inline Pixel AlphaBlend(Pixel src, Pixel dst, float alpha)
+{
+	//// Extract RGB components from source and destination
+	unsigned char srcR = static_cast<unsigned char>(src >> 16);
+	unsigned char srcG = static_cast<unsigned char>(src >> 8);
+	unsigned char srcB = static_cast<unsigned char>(src);
+	unsigned char dstR = static_cast<unsigned char>(dst >> 16);
+	unsigned char dstG = static_cast<unsigned char>(dst >> 8);
+	unsigned char dstB = static_cast<unsigned char>(dst);
+
+	// Alpha blending formula
+	dstR = static_cast<unsigned char>(alpha * static_cast<float>(srcR) + (1.0f - alpha) * static_cast<float>(dstR));
+	dstG = static_cast<unsigned char>(alpha * static_cast<float>(srcG) + (1.0f - alpha) * static_cast<float>(dstG));
+	dstB = static_cast<unsigned char>(alpha * static_cast<float>(srcB) + (1.0f - alpha) * static_cast<float>(dstB));
+
+	// Combine RGB components back into one color
+	return static_cast<Pixel>(dstR << 16) | static_cast<Pixel>(dstG << 8) | static_cast<Pixel>(dstB);
+}
 
 class Surface
 {
@@ -99,7 +118,8 @@ public:
 	Sprite( Surface* a_Surface, unsigned int a_NumFrames );
 	~Sprite();
 	// Methods
-	void Draw( Surface* a_Target, int a_X, int a_Y );
+	//void Draw( Surface* a_Target, int a_X, int a_Y );
+	void Draw(Surface* a_Target, int a_X, int a_Y, float alpha);
 	void DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a_Target ) const;
 	void SetFlags( unsigned int a_Flags ) { m_Flags = a_Flags; }
 	void SetFrame( unsigned int a_Index ) { m_CurrentFrame = a_Index; }

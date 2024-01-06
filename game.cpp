@@ -30,15 +30,13 @@ namespace Tmpl8
 		//convert dT to seconds
 		deltaTime /= 1000;
 
-//======Update Loop=================//
-
 		rotatingGunAnim.Update(deltaTime);
 
-//======Render Loop=================//
 		// clear the graphics window
 		screen->Clear(0);
-		
+
 		// draw the animation
-		rotatingGunAnim.Draw(screen, 0, 0);
+		rotatingGunAnim.Draw(screen, 0, 0,1);
+		
 	}
 };

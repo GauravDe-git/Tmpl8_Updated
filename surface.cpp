@@ -49,7 +49,7 @@ Surface::Surface(const char* a_File)
 }
 
 
-void Surface::LoadImage( const char* a_File )
+/*void Surface::LoadImage( const char* a_File )
 {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 	fif = FreeImage_GetFileType( a_File, 0 );
@@ -74,7 +74,34 @@ void Surface::LoadImage( const char* a_File )
         }
     }
 	FreeImage_Unload( dib );
+}*/
+void Surface::LoadImage(const char* a_File)
+{
+	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+	fif = FreeImage_GetFileType(a_File, 0);
+	if (fif == FIF_UNKNOWN) fif = FreeImage_GetFIFFromFilename(a_File);
+	FIBITMAP* tmp = FreeImage_Load(fif, a_File);
+	FIBITMAP* dib = FreeImage_ConvertTo32Bits(tmp);
+	FreeImage_Unload(tmp);
+	m_Width = m_Pitch = FreeImage_GetWidth(dib);
+	m_Height = FreeImage_GetHeight(dib);
+	m_Buffer = (Pixel*)MALLOC64(m_Width * m_Height * sizeof(Pixel));
+	if (m_Buffer)
+	{
+		m_Flags = OWNER;
+		assert(m_Pitch != 0);
+		for (int y = 0; y < m_Height; y++)
+		{
+			if (m_Pitch != 0)
+			{
+				unsigned char* line = FreeImage_GetScanLine(dib, m_Height - 1 - y);
+				memcpy(m_Buffer + (y * m_Pitch), line, m_Width * sizeof(Pixel));
+			}
+		}
+	}
+	FreeImage_Unload(dib);
 }
+
 
 Surface::~Surface()
 {
@@ -366,7 +393,8 @@ Sprite::~Sprite()
 	delete[] m_Start;
 }
 
-void Sprite::Draw( Surface* a_Target, int a_X, int a_Y )
+/* old implementation without alpha blending
+  void Sprite::Draw( Surface* a_Target, int a_X, int a_Y )
 {
 	if ((a_X < -m_Width) || (a_X > (a_Target->GetWidth() + m_Width))) return;
 	if ((a_Y < -m_Height) || (a_Y > (a_Target->GetHeight() + m_Height))) return;
@@ -417,6 +445,54 @@ void Sprite::Draw( Surface* a_Target, int a_X, int a_Y )
 				{
 					const Pixel c1 = *(src + x);
 					if (c1 & 0xffffff) *(dest + addr + x) = c1;
+				}
+			}
+			addr += dpitch;
+			src += m_Pitch;
+		}
+	}
+}*/
+
+//The alpha value is between 0 and 1, with 0 being fully transparent and 1 being fully opaque
+void Sprite::Draw(Surface* a_Target, int a_X, int a_Y, float alpha)
+{
+	if ((a_X < -m_Width) || (a_X > (a_Target->GetWidth() + m_Width))) return;
+	if ((a_Y < -m_Height) || (a_Y > (a_Target->GetHeight() + m_Height))) return;
+	int x1 = a_X, x2 = a_X + m_Width;
+	int y1 = a_Y, y2 = a_Y + m_Height;
+	Pixel* src = GetBuffer() + m_CurrentFrame * m_Width;
+	if (x1 < 0)
+	{
+		src += -x1;
+		x1 = 0;
+	}
+	if (x2 > a_Target->GetWidth()) x2 = a_Target->GetWidth();
+	if (y1 < 0)
+	{
+		src += -y1 * m_Pitch;
+		y1 = 0;
+	}
+	if (y2 > a_Target->GetHeight()) y2 = a_Target->GetHeight();
+	Pixel* dest = a_Target->GetBuffer();
+	int xs;
+	const int dpitch = a_Target->GetPitch();
+	if ((x2 > x1) && (y2 > y1))
+	{
+		unsigned int addr = y1 * dpitch + x1;
+		const int width = x2 - x1;
+		const int height = y2 - y1;
+		for (int y = 0; y < height; y++)
+		{
+			const int line = y + (y1 - a_Y);
+			const int lsx = static_cast<int>(m_Start[m_CurrentFrame][line]) + a_X;
+			xs = (lsx > x1) ? lsx - x1 : 0;
+			for (int x = xs; x < width; x++)
+			{
+				const Pixel c1 = *(src + x);
+				if (c1 & 0xff000000)
+				{
+					const Pixel c2 = *(dest + addr + x);
+					*(dest + addr + x) = AlphaBlend(c1, c2, alpha);
 				}
 			}
 			addr += dpitch;

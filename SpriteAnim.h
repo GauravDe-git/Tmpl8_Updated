@@ -13,7 +13,7 @@ public:
         totalTime += deltaTime;
     }
 
-    void Draw(Tmpl8::Surface* target, int x, int y) const;
+    void Draw(Tmpl8::Surface* target, int x, int y, float alpha) const;
 
     unsigned int GetCurrentFrame() const
     {

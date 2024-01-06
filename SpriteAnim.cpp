@@ -5,11 +5,11 @@ SpriteAnim::SpriteAnim(Tmpl8::Sprite* _sprite, float fps)
     , fps(fps)
 {}
 
-void SpriteAnim::Draw(Tmpl8::Surface* target, int x, int y) const
+void SpriteAnim::Draw(Tmpl8::Surface* target, int x, int y,float alpha) const
 {
     if (sprite && target)
     {
         sprite->SetFrame(GetCurrentFrame());
-        sprite->Draw(target, x, y);
+        sprite->Draw(target, x, y, alpha);
     }
 }
