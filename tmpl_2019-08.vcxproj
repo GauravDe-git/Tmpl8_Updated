@@ -243,6 +243,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="SpriteAnim.h" />

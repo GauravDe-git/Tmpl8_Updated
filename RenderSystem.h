@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-
 #include "Entity.h"
 #include "SpriteComponent.h"
 #include "Transform2DComponent.h"

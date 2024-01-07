@@ -2,6 +2,7 @@
 #include "Bounds.h"
 #include "ColliderComponent.h"
 #include "Entity.h"
+#include "PhysicsComponent.h"
 #include "SpriteComponent.h"
 #include "Transform2DComponent.h"
 
@@ -13,8 +14,10 @@ public:
         AddComponent(new Transform2DComponent());
         GetComponent<Transform2DComponent>()->position.x = initialX;
         GetComponent<Transform2DComponent>()->position.y = initialY;
+
         AddComponent(new SpriteComponent(filename, numFrames, fps, isAnimated));
-        AddComponent(new ColliderComponent(Bounds(Tmpl8::vec2(0, 0), Tmpl8::vec2(250, 230))));
+        AddComponent(new ColliderComponent(Bounds(Tmpl8::vec2(0, 0), Tmpl8::vec2(50, 50))));
+        AddComponent(new PhysicsComponent());
     }
 };
 

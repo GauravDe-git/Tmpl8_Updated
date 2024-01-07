@@ -60,6 +60,9 @@
     <ClInclude Include="ColliderComponent.h">
       <Filter>inc</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

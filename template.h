@@ -93,6 +93,11 @@ public:
 	void operator += ( const vec2& a ) { x += a.x; y += a.y; }
 	void operator *= ( const vec2& a ) { x *= a.x; y *= a.y; }
 	void operator *= ( float a ) { x *= a; y *= a; }
+
+	//Operator / and /=
+	vec2 operator / (float operand) const { return vec2(x / operand, y / operand); }
+	void operator /= (float a) { x /= a; y /= a; }
+
 	float& operator [] ( const int idx ) { return cell[idx]; }
 	float length() { return sqrtf( x * x + y * y ); }
 	float sqrLentgh() const { return x * x + y * y; }
