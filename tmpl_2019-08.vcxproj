@@ -237,21 +237,12 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bounds.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="Component.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="PhysicsComponent.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="SpriteAnim.h" />
-    <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="Transform2DComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="_readme.txt" />

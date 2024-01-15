@@ -1,7 +1,4 @@
 #pragma once
-#include "Player.h"
-#include "RenderSystem.h"
-
 namespace Tmpl8 {
 
 class Surface;
@@ -19,9 +16,6 @@ public:
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 private:
 	Surface* screen;
-	Player* player;
-	RenderSystem renderSystem;
-	std::vector<Entity*> entities;
 };
 
 }; // namespace Tmpl8
